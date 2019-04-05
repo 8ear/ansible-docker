@@ -1,0 +1,5 @@
+max-concurrent-downloads: 50
+max-concurrent-uploads: 50
+log-driver: "json-file"
+max-size: "10m"
+max-file: 5

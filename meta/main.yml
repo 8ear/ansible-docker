@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: "8ear"
+  company: -
+  license: BSD3
+  min_ansible_version: 1.4
+  platforms:
+   - name: Ubuntu
+     versions:
+      - xenial
+      - bionic
+  - name: Debian
+    versions:
+      - stretch
+      - buster
+  categories:
+   - virtualization
+dependencies: []

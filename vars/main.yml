@@ -1,0 +1,18 @@
+---
+
+env:
+ RUNLEVEL: 1
+
+
+DOCKER_COMPOSE_VERSION: 1.24.0
+DOCKER_COMPOSE_SHA256: bee6460f96339d5d978bb63d17943f773e1a140242dfa6c941d5e020a302c91b
+
+debian_pkg:
+- apt-transport-https 
+- ca-certificates
+- curl
+- gnupg2
+- software-properties-common
+- sudo
+
+ubuntu_pkg: {{debian_pkg}}

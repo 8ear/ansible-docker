@@ -1,0 +1,32 @@
+- name: Save OS > 'uname -s'
+  shell: echo $(uname -s)
+  register: OS
+
+- name: Save ARCH > 'uname -m'
+  shell: echo $(uname -m)
+  register: ARCH
+
+- include: debian_ubuntu.yml
+  when: ansible_os_family == "Debian"
+
+- name: Install docker-compose
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/{{DOCKER_COMPOSE_VERSION}}/docker-compose-{{OS.stdout}}-{{ARCH.stdout}}"
+    dest: /usr/local/bin/docker-compose
+    checksum: sha256: {{DOCKER_COMPOSE_SHA256}}
+    mode: 0555
+
+- name: modify login user
+  user:
+    name: "{{common_user_name}}"
+    groups: docker
+    state: present
+
+- name: Copy New 'daemon.json'
+  copy:
+    src: files/daemon.json
+    dst: /etc/docker/
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart docker
